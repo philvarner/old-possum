@@ -9,6 +9,10 @@
 * https://www.scala-algorithms.com/
 * Advanced Functional Data Structures and Algorithms by Atul S. Khot and Raju Kumar Mishra
 
+### Visualizations
+
+* [Toptal - Sorting Algorithms Animations](https://www.toptal.com/developers/sorting-algorithms)
+
 ### Less academic/technical
 
 * [Grokking Algorithms](https://www.manning.com/books/grokking-algorithms) by Aditya Y. Bhargava
@@ -47,9 +51,39 @@
   [Cats Chain](https://typelevel.org/cats/datatypes/chain.html)
 * Binary tree
 
+## Shuffling
+
+* Fisher-Yates
+* https://www.developer.com/tech/article.php/10923_616221_2/How-We-Learned-to-Cheat-at-Online-Poker-A-Study-in-Software-Security.htm
+* Sattolo's algorithm https://danluu.com/sattolo/
+
 ## Sorts
 
-### Insertion Sort
+* Selection - repeatedly find the next lowest value in the remaining list and swap to head. slow, but, data movement is minimal
+* Insertion - repeatedly swap the value that was at the head of the unsorted partition with the next higher value, then move to the next and repeat. fast for already-sorted data.
+* Shell - *h*-sorted array -- insertion sort with *h* interleaved sorted sequences
+* Bubble sort (sinking sort) - repeatedly compare adjacent elements until the list is sorted
+* Merge sort
+* Quicksort
+* Heap
+* Timsort
 
 
 
+Insertion sort - insert each element in the right place n^2 - 2n memory
+selection sort - find the next lowest element and swap n^2 - in place
+Shellsort sort - (related to insertion sort) in-place - progressive k-sort, moves longer distances than insertion sort Ciura's gap sequence [701, 301, 132, 57, 23, 10, 4, 1]
+
+bubble sort - continually swap items until they appear in the correct place
+
+merge sort - swap elements in increasingly larger lists
+
+introsort - quicksort then heap sort for small sets
+Timsort
+
+quicksort - recursively sort lists into bigger/smaller than pivot (why not called pivot sort)  Tony Hoare
+ - scan from right and left to find two elements that are both out of order, then swap
+
+
+in place quicksort - swap
+non-in-place quicksort - find all less, find all greater, and recurse

@@ -33,9 +33,9 @@
 
 `checkout` was a confusing command, an has now mostly been replaced by other commands.
 
-Instead of `git checkout -b some_branch`, use `git branch  my-branch -u origin/my-branch`
+Instead of `git checkout -b some_branch`, use `git branch some-branch -u origin/some-branch`
 
-Instead of `git checkout some_branch`, use `git switch my-branch`
+Instead of `git checkout some_branch`, use `git switch some-branch`
 
 Instead of `git checkout file_in_working_tree`, use `git restore file_in_working_tree`
 
