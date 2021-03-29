@@ -7,6 +7,8 @@
 
 ## Table of Contents
 
+* [Languages Reference](languages-reference) -- Python, TypeScript, Go, Scala, and Haskell
+
 * [Algorithms](algorithms/)
 * [Bash](bash/)
 * [Command-line](cmdline/)
@@ -20,6 +22,10 @@
 * [Python](python/)
 * [Scala](scala/)
 * [Vim](vim/)
+
+## Other assemblages
+
+* [Project Awesome](https://project-awesome.org/)
 
 ## License
 
