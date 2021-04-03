@@ -18,3 +18,20 @@ gdaltindex band-extent.shp src4b-cog.tif
 ogr2ogr -segmentize 1000 -t_srs EPSG:4326 -lco RFC7946=YES -lco WRITE_BBOX=YES band-epsg4326.geojson band-extent.shp 
 
 
+time gdal_translate -r cubic -outsize 1200 0 --config AWS_REQUEST_PAYER requester --config GDAL_CACHEMAX 512 /vsis3/sentinel-s2-l2a/tiles/41/D/NC/2019/4/1/0/R60m/TCI.jp2 /vsis3/s22s-phil/out.jpg 
+
+
+time gdalbuildvrt -o /vsistdout/ -separate /vsis3/sentinel-s2-l1c/tiles/5/V/PL/2019/1/30/0/B04.jp2 /vsis3/sentinel-s2-l1c/tiles/5/V/PL/2019/1/30/0/B03.jp2 /vsis3/sentinel-s2-l1c/tiles/5/V/PL/2019/1/30/0/B02.jp2 --config AWS_REQUEST_PAYER requester | gdal_translate /vsistdin/ /vsistdout/ -ot Byte -scale 0 6000 0 255 -exponent 0.4 --config AWS_REQUEST_PAYER requester | gdal_translate -r cubic -outsize 1200 0 /vsistdin/ x.jpg
+
+sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+
+sudo apt-get install gdal-bin
+
+
+time gdal_translate -r cubic -outsize 1200 0 \
+--config AWS_REQUEST_PAYER requester \
+--config GDAL_CACHEMAX 512 \
+--config GDAL_PAM_ENABLED NO \
+--config GDAL_DISABLE_READDIR_ON_OPEN YES \
+--config CPL_VSIL_CURL_ALLOWED_EXTENSIONS jp2,tif,jpg \
+--config CPL_VSIL_CURL_CHUNK_SIZE 1000000 /vsis3/sentinel-s2-l2a/tiles/31/R/FK/2018/12/28/0/R60m/TCI.jp2  x.tif

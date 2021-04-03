@@ -1,12 +1,23 @@
 # etc.
 
-Everything that doesn't fit anywhere else
+Everything that doesn't fit elsewhere.
 
 ## Standards
 
 * [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 * [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 * [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) and [commitlint](https://github.com/conventional-changelog/commitlint) 
+
+## Cheatsheets
+
+* [devhints.io Rico's cheatsheets](https://devhints.io/)
+* [Every Programmer Should Know](https://github.com/mtdvio/every-programmer-should-know)
+
+## Language Examples and Comparisons
+
+* hyperpolyglot.org/
+* https://github.com/dhinojosa/language-matrix
+* [Where to go to learn Rust in 2021](https://loige.co/where-to-go-to-learn-rust-in-2021/)
 
 ## Characters Sets
 
@@ -54,3 +65,11 @@ TBD
 * [daringfireball Markdown Syntax](https://daringfireball.net/projects/markdown/syntax)
 * [adam-p Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 * [Writing on GitHub -- GH-flavored MarkDown](https://docs.github.com/en/github/writing-on-github)
+
+## Regexes
+
+https://en.wikibooks.org/wiki/Regular_Expressions/POSIX_Basic_Regular_Expressions
+
+## Web Development
+
+* https://github.com/mtdvio/web-development-resources

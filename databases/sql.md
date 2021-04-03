@@ -12,11 +12,33 @@
 * [Effective SQL: 61 Specific Ways to Write Better SQL](https://learning.oreilly.com/library/view/effective-sql-61/9780134579078/) by Viescas, Steele, and Clothier
 * [Hyperpolyglot -- Relational Data Tools: SQL, Awk, Pig](https://hyperpolyglot.org/data)
 
-## Basics
+## Terminology
+
+* You open a **session** with a database
+* You start and later commit or rollback a **transaction** 
+
+## Table Definition
+
+Temporary tables for intermediate calculations
+
+NOT NULL by default with default value if applicable
+CONSTRAINT x CHECK BETWEEN 0 AND 100
+and, can check contraints in this and other tables -- todo: find some examples of this
+UNIQUE
+PRIMARY KEY
+REFERENCES table2(col1) -- another table
+Referential actions -- ON UPDATE, ON DELETE -- CASCADE, SET NULL, SET DEFAULT, NO ACTION
+
+
+MySQL - AUTO_INCREMENT
+PostgreSQL - `SERIAL PRIMARY KEY` or `BIGSERIAL`
+
+
+## Query
 
 * `=` not `==`
 * comments with `--` or `/* /*`
-* strings -- single quotes, not double quotes. 
+* strings -- 'single quotes', not "double quotes"
 
 Sweaty feet will give horrible odors
 
@@ -35,6 +57,43 @@ GROUP BY
 HAVING 
 SELECT 
 ORDER BY
+
+## Regexes
+
+* [SQL Pocket Guide - Regular Expressions](https://learning.oreilly.com/library/view/sql-pocket-guide/9781449397586/ch01s45.html)
+* [Oracle Regex Pocket Reference](https://learning.oreilly.com/library/view/oracle-regular-expressions/0596006012/)
+
+### MySQL
+
+https://dev.mysql.com/doc/refman/8.0/en/pattern-matching.html
+
+```
+s REGEX p
+```
+
+* case-insensitive by default
+* `\` is escape char, so `\\` for a literal `\` 
+* character classes - [:alnum:], [:alpha:], [:blank:], [:cntrl:], [:digit:], [:graph:], [:lower:], [:print:], [:punct:], [:space:], [:upper:], [:xdigit:], [[:<:]] (beginnning of word), [[:<:]] (end of word)
+
+
+### PostgreSQL
+
+[PostgreSQL Pattern Matching](https://www.postgresql.org/docs/current/functions-matching.html)
+
+`LIKE` and `NOT LIKE` -- `%` matches 0 or more, `_` matches single
+ILIKE -- insensitive
+
+ESCAPE '@' -- alternate escape char if string contains `\`
+
+```
+s SIMILAR TO p`
+```
+
+supports POSIX
+
+
+
+\1 backref
 
 ## JOIN
  
@@ -205,20 +264,32 @@ ALL vs DISTINCT (**not** UNIQUE)
 
 ## Datetime functions
 
-MySQL SELECT CURDATE();
+### PostgreSQL
+[types](https://www.postgresql.org/docs/current/datatype-datetime.html) and [functions](https://www.postgresql.org/docs/current/functions-datetime.html)
 
+`timestamp with time zone` or `timestamptz`
+
+PostgreSQL TO_TIMESTAMP(epoch_seconds)
 PostgreSQL SELECT CURRENT_DATE;
 
-SQLite SELECT CURRENT_DATE;
+### MySQL
 
-Oracle SELECT SYSDATE FROM dual;
+[types](https://dev.mysql.com/doc/refman/8.0/en/datetime.html) and [functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
-SQL Server SELECT CAST(GETDATE() AS DATE);
+MySQL SELECT CURDATE();
+
 
 ## Views
 
 ## indexes
 
+## JSON
+
+* PostgreSQL JSON [types](https://www.postgresql.org/docs/current/datatype-json.html) and [functions](https://www.postgresql.org/docs/current/functions-json.html)
+* [MySQL - The JSON Data Type](https://dev.mysql.com/doc/refman/8.0/en/json.html)
+  
+
+## Other
 
 WITH clause vs. subquery - PostgreSQL, Oracle, and SQL Server
 

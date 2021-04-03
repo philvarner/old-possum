@@ -1,10 +1,36 @@
 # Command Line
 
+- [Command Line](#command-line)
+  - [Resources](#resources)
+  - [To Remember](#to-remember)
+  - [Terminals](#terminals)
+  - [Prompt](#prompt)
+  - [Replay cmd line sessions](#replay-cmd-line-sessions)
+  - [Tools](#tools)
+  - [JSON](#json)
+  - [Tricks](#tricks)
+  - [Grouping commands](#grouping-commands)
+  - [Tools](#tools-1)
+    - [curl](#curl)
+    - [GIF Creation from PNGs](#gif-creation-from-pngs)
+    - [Webserver](#webserver)
+  - [File MIME Type](#file-mime-type)
+    - [Rename files and add a prefix](#rename-files-and-add-a-prefix)
+  - [tmux](#tmux)
+  - [screen](#screen)
+  - [Scratch (todo)](#scratch-todo)
+
 ## Resources
 
 * [The Grymoire - home for UNIX wizards](http://www.grymoire.com/Unix/)
 * [MIT Missing Lectures - Data Wrangling](https://missing.csail.mit.edu/2020/data-wrangling/)
+* [Ron Duplain's dotfiles](https://github.com/rduplain/home)
 
+## To Remember
+
+* `cd -` cd back to previous directory
+
+ 
 ## Terminals
 
 MacOS's Terminal is pretty bare-bones, so most people use other ones.
@@ -20,11 +46,6 @@ MacOS's Terminal is pretty bare-bones, so most people use other ones.
 
 * [ASCIInema](https://asciinema.org/)
 
-## Screen multiplexers
-
-* tmux
-* screen
-
 ## Tools
 
 * [lnav](http://lnav.org/) The Log File Navigator
@@ -37,7 +58,6 @@ MacOS's Terminal is pretty bare-bones, so most people use other ones.
 ## Tricks
 
 * adding `--` to many command line tools indicates the flags have ended. This means `ls -- -l` will list a file named `-l`
-
 
 ## Grouping commands
 
@@ -54,18 +74,38 @@ Using a subshell
 
 ## Tools
 
+### curl
+
+* `--fail` to get an error code for a 4xx or 5xx response, useful for using curl in scripts.
+
+### GIF Creation from PNGs
+
+`convert -loop 0 -delay 100 in1.png in2.png out.gif`
+
 ### Webserver
 
-Run a webserver in the current directory:
-```
-npx node-static -p 8080
-```
+Run a webserver in the current directory: `npx node-static -p 8080`
 
 ## File MIME Type
 
-file  --mime-type {filename}
+`file  --mime-type {filename}`
 
-## Screen
+### Rename files and add a prefix
+
+rename 's/(.+)\.JPG/prefix_$1.jpg/' *.JPG
+
+use `-n` flag for a dry run
+
+## tmux
+
+* [Getting Started](https://github.com/tmux/tmux/wiki/Getting-Started)
+
+* `tmux new`
+* `C-b` puts into tmux command mode
+* `C-b %` - split into two vertical panes
+* `C-b "` - split into two horizontal panes
+
+## screen
 
 http://aperiodic.net/screen/quick_reference
 screen <cmd>
@@ -76,11 +116,6 @@ https://unix.stackexchange.com/questions/67503/move-all-files-with-a-certain-ext
 
 https://stackoverflow.com/questions/11289551/argument-list-too-long-error-for-rm-cp-mv-commands
 
-
-
-tmux
-
-https://github.com/tmux/tmux/wiki/Getting-Started
 
 
 log cmd
@@ -493,7 +528,6 @@ strings - extract strings from binary file
 od - binary dump 
 xxd - binary dump (with reverse) 
 file - guess at type of file 
-tmux - keep remote terminals open 
 column -t : put into columns  
 type : what type of thing is this executable
 cmp : compare binary files
@@ -801,3 +835,6 @@ tiff2pdf -p letter -j -q 75 -t "Document" -f -o output.pdf input.tiff
 
 
 parallel 'cd {}; cdo -f nc2 mergetime *.nc xxx/LST_{}.nc' ::: {2000..2003}
+
+find /data/ -name "*" -print0 | xargs -0 rm
+find . -type f -name "*.mp3" -exec cp {} /tmp/MusicFiles \;

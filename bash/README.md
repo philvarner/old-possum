@@ -6,6 +6,34 @@
 * [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/) by Mendel Cooper
 * [Classic Shell Scripting](https://learning.oreilly.com/library/view/classic-shell-scripting/0596005954/) by Arnold Robbins and Nelson H. F. Beebe
 
+## Examples
+
+```sh
+#!/usr/bin/env bash
+set -Eeuo pipefail
+# set -x # print each command before exe
+
+readonly VAR1="foo"
+
+# todo
+```
+
+## Tricky Details
+
+* variable assignment requires no spaces around the `=` -- otherwise, it's 3 space-delimited arguments! e.g., "FOO=foo"
+* not block-scoped -- variables that are assigned are in-scope for the rest of the script
+* use `[[ ${A} = 'a']]` for conditionals -- `[ ${A} = 'a']` fails if `${A}` is undefined
+* export allows sub-processes (shells?) to see the value, or run cmds with "FOO=foo some-cmd"
+* `set +o history` to not write commands to history (good for passwords and keys)
+* VARIABLES are usually ALL CAPS
+* reference in strings as "a${SOMEVAR}b" -- double quotes interpolate, single quotes do not
+
+## Other
+
+* `readonly A=a` ==> readonly vars
+* `local A=a` ==> by default vars are global, this makes A local to the function it's defined in
+* clean Bash shell ==> `env -i bash --noprofile --norc`
+
 ## What's the difference between .bash_profile and .bashrc?
 
 https://blog.flowblok.id.au/2013-02/shell-startup-scripts.html
@@ -25,7 +53,7 @@ fi
 
 Start scripts with:
 ```
-#!/bin/bash
+#!/usr/bin/env bash
 set -Eeuo pipefail
 set -x # print each command before exec
 ```
@@ -48,7 +76,7 @@ while [[ true ]]; do
 done
 ```
 
-## Default values
+## Default variable values
 
 ```
 FOO=${VARIABLE:-default} 
@@ -169,7 +197,15 @@ done
 find . -name '*.pdf' -print0 | sort -z | xargs -0 -L1 sh -c 'echo "<li><a href=\"${0:2}\">${0:2}</a></li>"' > index.html
 ```
 
-## GIF Creation from PNGs
-```
-convert -loop 0 -delay 100 in1.png in2.png out.gif
-```
+## Glob
+
+* `*` - zero or more characters (equivalent to regex `.*`
+• `?` - a single character (equivalent to regex `.`)
+• [abz] - a b or z
+• [a-z] - range of a to z
+
+## Array
+
+* array --  `arr=("a" "b" "c")`
+* access -- `echo "${arr[0]}"`
+* length -- `echo {#arr[@]}`

@@ -29,11 +29,10 @@
 * [The Algorithm Design Manual](https://www.algorist.com/) by Steven Skiena
 * [Algorithms in a Nutshell](https://learning.oreilly.com/library/view/algorithms-in-a/9781491912973/) by George T. Heineman, Gary Pollice, and Stanley Selkow
 * [TheAlgorithms](https://the-algorithms.com/) and [github](https://github.com/TheAlgorithms)
-* Coursera [Data Structures and Algorithms Specialization](https://www.coursera.org/specializations/data-structures-algorithms)
+* [Coursera - Data Structures and Algorithms Specialization](https://www.coursera.org/specializations/data-structures-algorithms)
 * [Introduction to Algorithms (MIT SMA 5503)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-introduction-to-algorithms-sma-5503-fall-2005/)
 * [Design and Analysis of Algorithms (MIT 6.046J / 18.410J)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/)
 * [Advanced Data Structures (MIT 6.851)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-851-advanced-data-structures-spring-2012/)
-
 
 ## Data Structures
 
@@ -59,31 +58,13 @@
 
 ## Sorts
 
+* Bubble sort (sinking sort) - repeatedly pass through the list and compare adjacent elements, until the list is sorted
 * Selection - repeatedly find the next lowest value in the remaining list and swap to head. slow, but, data movement is minimal
-* Insertion - repeatedly swap the value that was at the head of the unsorted partition with the next higher value, then move to the next and repeat. fast for already-sorted data.
-* Shell - *h*-sorted array -- insertion sort with *h* interleaved sorted sequences
-* Bubble sort (sinking sort) - repeatedly compare adjacent elements until the list is sorted
-* Merge sort
-* Quicksort
-* Heap
-* Timsort
-
-
-
-Insertion sort - insert each element in the right place n^2 - 2n memory
-selection sort - find the next lowest element and swap n^2 - in place
-Shellsort sort - (related to insertion sort) in-place - progressive k-sort, moves longer distances than insertion sort Ciura's gap sequence [701, 301, 132, 57, 23, 10, 4, 1]
-
-bubble sort - continually swap items until they appear in the correct place
-
-merge sort - swap elements in increasingly larger lists
-
-introsort - quicksort then heap sort for small sets
-Timsort
-
-quicksort - recursively sort lists into bigger/smaller than pivot (why not called pivot sort)  Tony Hoare
+* Insertion - repeatedly swap the head of the unsorted partition with the next higher value, then move to the next and repeat. fast for already-sorted data. what most people use for sorting cards.
+* Shell - *h*-sorted array -- insertion sort with *h* interleaved sorted sequences, gets items closer to their eventual location with each reduction of *h* . Ciura's gap sequence [701, 301, 132, 57, 23, 10, 4, 1]
+* Mergesort - divide-and-conquer -- recursively sort and combine sub-lists
+* Quicksort - recursively sort lists into bigger/smaller than pivot (why not called pivot sort)  Tony Hoare
  - scan from right and left to find two elements that are both out of order, then swap
-
-
-in place quicksort - swap
-non-in-place quicksort - find all less, find all greater, and recurse
+* Introsort - quicksort, then heap sort for small sets
+* Heapsort
+* Timsort

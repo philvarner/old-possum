@@ -4,6 +4,10 @@
 
 * tbd
 
+## Mac localhost
+
+`http://docker.for.mac.localhost`
+
 ## Stop All
 
 docker stop $(docker ps -aq)
@@ -110,3 +114,40 @@ docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}") && docker ps 
 docker system prune --filter "until=200h"
 
 journalctl -u docker.service
+
+
+
+docker system prune -a -f
+
+docker run
+
+docker rm
+
+docker log {container-name}
+
+https://www.ctl.io/developers/blog/post/docker-networking-rules/
+http://txt.fliglio.com/2013/11/creating-a-mysql-docker-container/
+
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql:5.7
+
+
+ mysql -uroot -h127.0.0.1 -P3306
+
+docker run --rm -d locushealth/mysql:repopped
+
+docker rm -f `docker ps -q`
+
+
+You'll also need to modify `config/database.yml` to point to the host `127.0.0.1` instead of `localhost`, because `localhost` tries to connect over a socket instead of HTTP.
+
+
+[10:53] 
+If I were starting from scratch, I'd grab the mysql container from Docker Hub for the version we want, spin it up, run the provisioning stuff against it like any other new DB, then save it as an image and use that going forward.
+
+https://severalnines.com/blog/mysql-docker-containers-understanding-basics
+
+
+keep small -- use alpine, busybox, or debian base images
+single process/svc per container
+cleanup after each command
+use multi-stage build

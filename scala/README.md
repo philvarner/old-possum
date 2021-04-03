@@ -36,6 +36,12 @@ def countAndLog(n: Int): Writer[Vector[String], Int] = {
 println(countAndLog(10).run)
 ```
 
+### Executor Service
+
+```scala
+implicit val ec = ExecutionContext.fromExecutor(
+                    Executors.newFixedThreadPool(4))
+```
 
 ### Scratch
 
@@ -68,3 +74,9 @@ x: Seq[Int] = Vector(2, 3, 4, 5)
 scala> val Array(1, b, 3, x @_*) = Array(1,2,3,4,5)
 b: Int = 2
 x: Seq[Int] = Vector(4, 5)
+
+
+## Futures
+
+recover -> T
+recoverWith -> F[T]

@@ -1,6 +1,13 @@
-# Postgresql
+# PostgreSQL
 
-Postgresql notes
+## Cheatsheets
+
+* [Postgres Cheat Sheet](https://postgrescheatsheet.com)
+* [Kartones/postgres-cheatsheet.md](https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546)
+* [postgresql tutorial cheatsheet](https://www.postgresqltutorial.com/postgresql-cheat-sheet/)
+
+
+## Notes
 
 Basics
 
@@ -377,6 +384,3 @@ postmaster is main one
 
 
 ON_ERROR_STOP=on -- stop on first error in a script 
-
-
-

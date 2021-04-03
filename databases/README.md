@@ -9,4 +9,5 @@
 
 * [SQL](sql.md)
 * [Elasticsearch](elasticsearch.md)
-* [Postgresql](postgresql.md)
+* [PostgreSQL](postgresql.md)
+* [MySQL](mysql.md)
