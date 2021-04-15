@@ -9,16 +9,33 @@
   - [Tools](#tools)
   - [JSON](#json)
   - [Tricks](#tricks)
+  - [Redirect all output from a program:](#redirect-all-output-from-a-program)
   - [Grouping commands](#grouping-commands)
-  - [Tools](#tools-1)
-    - [curl](#curl)
-    - [GIF Creation from PNGs](#gif-creation-from-pngs)
-    - [Webserver](#webserver)
+  - [curl](#curl)
+  - [GIF Creation from PNGs](#gif-creation-from-pngs)
+  - [Webserver](#webserver)
   - [File MIME Type](#file-mime-type)
-    - [Rename files and add a prefix](#rename-files-and-add-a-prefix)
+  - [Rename files and add a prefix](#rename-files-and-add-a-prefix)
   - [tmux](#tmux)
   - [screen](#screen)
+  - [grep](#grep)
+  - [awk](#awk)
+  - [sed](#sed)
+  - [tr](#tr)
+  - [cut](#cut)
+  - [paste](#paste)
+  - [sort](#sort)
+  - [less](#less)
+  - [find](#find)
+  - [parallel](#parallel)
+  - [open](#open)
+  - [Etc](#etc)
+  - [Shell](#shell)
+  - [Using killall](#using-killall)
+  - [Scripting](#scripting)
   - [Scratch (todo)](#scratch-todo)
+- [Scratch (todo)](#scratch-todo-1)
+  - [General](#general)
 
 ## Resources
 
@@ -29,7 +46,6 @@
 ## To Remember
 
 * `cd -` cd back to previous directory
-
  
 ## Terminals
 
@@ -59,6 +75,10 @@ MacOS's Terminal is pretty bare-bones, so most people use other ones.
 
 * adding `--` to many command line tools indicates the flags have ended. This means `ls -- -l` will list a file named `-l`
 
+## Redirect all output from a program: 
+
+command > /dev/null 2>&1& 
+
 ## Grouping commands
 
 conditionally do left and right, but non-conditionally do the right cmds
@@ -72,17 +92,15 @@ Using a subshell
 (cd target/path && curl -O URL)
 ```
 
-## Tools
-
-### curl
+## curl
 
 * `--fail` to get an error code for a 4xx or 5xx response, useful for using curl in scripts.
 
-### GIF Creation from PNGs
+## GIF Creation from PNGs
 
 `convert -loop 0 -delay 100 in1.png in2.png out.gif`
 
-### Webserver
+## Webserver
 
 Run a webserver in the current directory: `npx node-static -p 8080`
 
@@ -90,7 +108,7 @@ Run a webserver in the current directory: `npx node-static -p 8080`
 
 `file  --mime-type {filename}`
 
-### Rename files and add a prefix
+## Rename files and add a prefix
 
 rename 's/(.+)\.JPG/prefix_$1.jpg/' *.JPG
 
@@ -107,108 +125,46 @@ use `-n` flag for a dry run
 
 ## screen
 
-http://aperiodic.net/screen/quick_reference
+* [Quick Reference](http://aperiodic.net/screen/quick_reference)
+* [IU](https://kb.iu.edu/d/acuy)
+
+```sh  
 screen <cmd>
 screen -ls
-screen -r  ==) reattach
-
-https://unix.stackexchange.com/questions/67503/move-all-files-with-a-certain-extension-from-multiple-subdirectories-into-one-di
-
-https://stackoverflow.com/questions/11289551/argument-list-too-long-error-for-rm-cp-mv-commands
-
-
-
-log cmd
-system log
-
-
-
-
-https://gist.github.com/emadehsan/ad6e81ca595e99045abb391844f45346
-
-screen https://kb.iu.edu/d/acuy
-
+screen -r  # reattach
 
 screen -dmS session_name sh -c '/share/Sys/autorun/start_udp_listeners.sh; exec bash'
-
 
 screen -L
 
 ctrl-A d
 
-screen -r
-
-
 screen -L time docker run -it -w /tmp --ulimit nofile=90000:90000 \
     -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
     -e JAVA_OPTS="-Xmx4g -Dtype.safe.config.arg=$XXX" \
     repo/image-name --some-flags
+```
+
+## grep
+
+* after: -A num 
+* before: -B NUM 
+* around: -C NUM 
+* insensitive: -i
+* inverse match: -v
+* names of files only: -l 
+* inverse name of file only: -L 
+* count only: -c 
+* original line number: -n
+* color matches: --color=always
+* recursive dir: -r
+* don't print filename: -h 
+
+* egrep - extended, includes char classes, bracket classes, etc. 
+* fgrep - fixed strings, usually read from -f parameter 
 
 
-## Scratch (todo)
-
-gnuplot  | gnuplot -p -e 'set boxwidth 0.5; plot "-" using 1:xtic(2) with boxes'
-
-
-pup https://github.com/EricChiang/pup HTML
-jq https://stedolan.github.io/jq/
-
-
-R w/ ggplot https://ggplot2.tidyverse.org/
-
-uniq -c  --- collapse same lines
-
-
-Remove the first line if it's blank in all java files 
-find . -name '*.java' | xargs -n 1 sed -e '/./,$!d' -i .bak 
--n 1 is necessary b/c sed take one file argument 
-http://stackoverflow.com/questions/1935081/remove-leading-whitespace-from-file
-
-xargs, parallel 
-
-General 
-
-sort [file] | uniq -c | awk '$1 !~/1/'  
-
-find core/src/main/resources/ -name '*.properties' | grep 'jive_i18n_..\(_..\)\?.properties' | xargs grep -h 'profile.friends.remove.confirm.text' | cut -d " " -f 3- | sed -e 's/\(.*\)/"\1"/g' | groovysh | grep '===>' 
-
-
-remove blank lines
-sed -i '/^\s*$/d' file.txt
-
-awk -v n=-2 'NR==n+1 && !NF{next} /match-me/ {n=NR}1' file
-
-
-gnuplot
-
-grep
-
-grep-- 
-after: -A num 
-before: -B NUM 
-around: -C NUM 
-insensitive: -i
-inverse match: -v
-names of files only: -l 
-inverse name of file only: -L 
-count only: -c 
-original line number: -n
-color matches: --color=always
-recursive dir: -r
--h don't print filename 
-
-egrep-- 
-
-extended, includes char classes, bracket classes, etc. 
-
-fgrep-- 
-
-fixed strings, usually read from -f parameter 
-
-
-
-
-awk
+## awk
 
 focused more on columnar data
 
@@ -234,10 +190,7 @@ awk '{total = total + $1}END{print total}'
 
 awk '$1 == 1 && $2 ~ /^c[^ ]*e$/ { print $2 }'
 
-
-
-sed
-
+## sed
 
 -E :: extended syntax -- parens are special chars
 
@@ -301,7 +254,7 @@ Advanced
 
 sed -i ':a;N;$!ba;s/\0/ /g' *xml 
 
-tr
+## tr
 
      tr [-Ccsu] string1 string2     tr [-Ccu] -d string1 
      tr [-Ccu] -s string1 
@@ -379,10 +332,7 @@ Replacing non az chat with lb
 tr -s \n [ *]
 
 
-
-
-
-cut
+## cut
 
 cut -f 2,3,4 foo.txt 
 
@@ -402,7 +352,7 @@ $ echo "a,b,c,d,e" | cut -d ',' -f '1,3-'
 a,c,d,e
 
 
-paste
+## paste
 
 paste files 
 
@@ -427,7 +377,7 @@ creates output with per-line concatenation
 
 paste -sd,   # to lines -> csv line 
 
-sort
+## sort
 
 Case-insensitive : -f 
 Sort numerically instead of lexi: -n
@@ -441,7 +391,7 @@ keys: -k F1[.C1][,F2[.C2]] (F==field, C==character, comma is range)
 
 sort -n -k1,1
 
-less
+## less
 
 options-- 
 verbose prompt : -m 
@@ -467,7 +417,7 @@ ignore N chars: -s N
 ignore N whitespace-sep fields: -f N 
 
 
-find
+## find
 
 -name  
 -path (or first arg) 
@@ -487,7 +437,7 @@ find
 -exec ; : invoke shell command 
 -ok ; : invoke shell command with confirmation 
 
-parallel 
+## parallel 
 
 https://www.gnu.org/software/parallel/man.html 
 
@@ -496,17 +446,14 @@ account for newlines: find . -type f -print0 | parallel -q0 perl -i -pe 's/FOO B
 parallel gzip ::: *.html
 parallel lame {} -o {.}.mp3 ::: *.wav
 
-open
+## open
 
 open files/urls 
      -a : app to open with 
      --args : args to pass to app 
      -f pipe to default text editor 
 
-
-
-
-Etc
+## Etc
 
 cd - : previous dir 
 pwdx 
@@ -546,9 +493,7 @@ Change default text editor: http://superuser.com/questions/231854/default-edito
 
 -exec` and `-exec + 
 
-Crash your system right quick:  :(){ :|:& };: 
-
-Shell
+## Shell
 
 redirects both stderr and stdout to the same stream: 2>&1 |
 history w/ sub: ^string1^string2^ OR !!:s/string1/string2/ OR !!:gs/string1/string2/) 
@@ -582,9 +527,7 @@ some command 2&1> all.out 
 Mac OS X 
 defaults write com.apple.finder AppleShowAllFiles TRUE 
 
-
-
-Using killall 
+## Using killall 
 
 killall -KILL Finder 
 
@@ -597,11 +540,7 @@ ipconfig getifaddr en0 ==> ip address
 
 rsync -aE myfolder server:              Copy changed files 
 
-
-
-
-
-Scripting 
+## Scripting 
 
 
 if test-command ; then commands ; elif test-command; then commands; else commands; fi
@@ -774,18 +713,14 @@ autoload -U compinit
 compinit
 
 
- find . -name "$1" -print0 | xargs -0 grep -i "$2"
-
-Redirect all output from a program: 
-
-command > /dev/null 2>&1& 
+find . -name "$1" -print0 | xargs -0 grep -i "$2"
 
 
 
-                   java -Xdebug -Xnoagent -Djava.compiler=NONE 
-                   -Xrunjdwp:transport=dt_socket,server=y,address=8787 
-
-
+```sh
+java -Xdebug -Xnoagent -Djava.compiler=NONE 
+  -Xrunjdwp:transport=dt_socket,server=y,address=8787 
+```
 
 find . -o -name '*.raw' -name '*.sraw' | xargs -0 grep -il watt.seas
 
@@ -838,3 +773,100 @@ parallel 'cd {}; cdo -f nc2 mergetime *.nc xxx/LST_{}.nc' ::: {2000..2003}
 
 find /data/ -name "*" -print0 | xargs -0 rm
 find . -type f -name "*.mp3" -exec cp {} /tmp/MusicFiles \;
+
+
+## Scratch (todo)
+
+https://unix.stackexchange.com/questions/67503/move-all-files-with-a-certain-extension-from-multiple-subdirectories-into-one-di
+
+https://stackoverflow.com/questions/11289551/argument-list-too-long-error-for-rm-cp-mv-commands
+
+
+log cmd
+system log
+
+https://gist.github.com/emadehsan/ad6e81ca595e99045abb391844f45346
+
+gnuplot  | gnuplot -p -e 'set boxwidth 0.5; plot "-" using 1:xtic(2) with boxes'
+
+
+pup https://github.com/EricChiang/pup HTML
+jq https://stedolan.github.io/jq/
+
+
+R w/ ggplot https://ggplot2.tidyverse.org/
+
+uniq -c  --- collapse same lines
+
+
+Remove the first line if it's blank in all java files 
+find . -name '*.java' | xargs -n 1 sed -e '/./,$!d' -i .bak 
+-n 1 is necessary b/c sed take one file argument 
+http://stackoverflow.com/questions/1935081/remove-leading-whitespace-from-file
+
+xargs, parallel 
+
+General 
+
+sort [file] | uniq -c | awk '$1 !~/1/'  
+
+find core/src/main/resources/ -name '*.properties' | grep 'jive_i18n_..\(_..\)\?.properties' | xargs grep -h 'profile.friends.remove.confirm.text' | cut -d " " -f 3- | sed -e 's/\(.*\)/"\1"/g' | groovysh | grep '===>' 
+
+
+remove blank lines
+sed -i '/^\s*$/d' file.txt
+
+awk -v n=-2 'NR==n+1 && !NF{next} /match-me/ {n=NR}1' file
+
+# Scratch (todo)
+
+https://unix.stackexchange.com/questions/67503/move-all-files-with-a-certain-extension-from-multiple-subdirectories-into-one-di
+
+https://stackoverflow.com/questions/11289551/argument-list-too-long-error-for-rm-cp-mv-commands
+
+
+log cmd
+system log
+
+https://gist.github.com/emadehsan/ad6e81ca595e99045abb391844f45346
+
+gnuplot  | gnuplot -p -e 'set boxwidth 0.5; plot "-" using 1:xtic(2) with boxes'
+
+
+pup https://github.com/EricChiang/pup HTML
+jq https://stedolan.github.io/jq/
+
+
+R w/ ggplot https://ggplot2.tidyverse.org/
+
+uniq -c  --- collapse same lines
+
+
+Remove the first line if it's blank in all java files 
+find . -name '*.java' | xargs -n 1 sed -e '/./,$!d' -i .bak 
+-n 1 is necessary b/c sed take one file argument 
+http://stackoverflow.com/questions/1935081/remove-leading-whitespace-from-file
+
+xargs, parallel 
+
+## General 
+
+sort [file] | uniq -c | awk '$1 !~/1/'  
+
+find core/src/main/resources/ -name '*.properties' | grep 'jive_i18n_..\(_..\)\?.properties' | xargs grep -h 'profile.friends.remove.confirm.text' | cut -d " " -f 3- | sed -e 's/\(.*\)/"\1"/g' | groovysh | grep '===>' 
+
+
+remove blank lines
+sed -i '/^\s*$/d' file.txt
+
+awk -v n=-2 'NR==n+1 && !NF{next} /match-me/ {n=NR}1' file
+
+
+Crash your system right quick:  :(){ :|:& };: 
+
+find . -type f | xargs -n1 grep foo
+
+-n1 -- only run once per field separator
+
+find . -type f -print0 | xargs -0 -n1 grep foo
+-print0 is to us the null byte as the separator, and -0 to expect it

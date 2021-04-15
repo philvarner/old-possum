@@ -35,18 +35,21 @@ Everything that doesn't fit elsewhere.
 
 * [crontab guru](https://crontab.guru/) - crontab editor
  
-## Languages
-
-### Clojure
+## Clojure
 
 * [Clojure for the Brave and True](https://www.braveclojure.com/clojure-for-the-brave-and-true/)
 
-### Haskell
+## Haskell
 
 * [Haskell Programming from First Principles](https://haskellbook.com/) by Allen and Moronuki
 * [Type Classes](https://typeclasses.com) courses, also by Allen and Moronuki
 * [Learn You a Haskell for Great Good](http://learnyouahaskell.com/)
 * Purely Functional Data Structures by Chris Okasaki
+
+## Rust
+
+* [MKAZ : Working with Rust](https://mkaz.blog/working-with-rust/)
+* [The Rust Programming Language (Covers Rust 2018)](https://nostarch.com/Rust2018) by Steve Klabnik and Carol Nichols
 
 ## Crypto
 

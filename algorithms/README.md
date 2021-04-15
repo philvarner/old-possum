@@ -1,5 +1,20 @@
 # Algorithms
 
+Discrete Math and Algorithms are hard. 
+
+Remember -- all of these algorithms were *discovered* (or refined for computers) over the last 70+ years.  
+No one person sat down and conjured them up in a few sessions like this class will.  They are *elementary* or 
+*fundamental*, they are not *simple* or *trivial*.
+
+If all of these problems are solved, why are we re-solving or re-analyzing them? Because if you don't learn on
+solved problems, you'll never be able to tackle unsolved ones. Also, the general problem solving process sharpens
+our process that we'll apply to programming -- think of isolating a single skill, like a tennis serve or basketball
+free throw.
+
+## Teaching Tools
+
+* [Deck of Cards](https://deck.of.cards/)
+
 ## Resources
 
 ### Functional-oriented
@@ -36,19 +51,24 @@
 
 ## Data Structures
 
-* Hash table, hash map, associative array, and dictionary refer to the same data structure. A symbol table is
-  usually implemented using a hash table, and is sometimes referred to synonymously. 
-* Bag - add and iterate, non-unique
-* Set - add and iterate, unique
+structure and semantics
+
+* Bag (multiset)- non-unique; add and iterate
+* Set (USet)- unique; add and iterate; unordered
+* SSet (sorted set) - supports successor find
+* Hash table (map, hash map, associative array, dictionary). A symbol table is
+  usually implemented using a hash table, and is sometimes referred to synonymously. Effectively a set of tuples queryable by the 1st element in the tuples.
 * Queue - FIFO
 * Pushdown stack - LIFO
-* List
-* Non-empty List 
+* Priority Queue - highest priority goes to top. usually implemented using heap.
 * Array
 * Vector
+* List
+* Non-empty List 
 * Chain - list-like, with constant time prepending and appending. See 
   [Cats Chain](https://typelevel.org/cats/datatypes/chain.html)
 * Binary tree
+* Heap
 
 ## Shuffling
 

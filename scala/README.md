@@ -18,6 +18,23 @@
 
 ## Examples
 
+### Java <-> Scala conversion
+
+[Conversions Between Java and Scala Collections <= 2.12](https://docs.scala-lang.org/overviews/collections/conversions-between-java-and-scala-collections.html)
+[Conversions Between Java and Scala Collections == 2.13](https://docs.scala-lang.org/overviews/collections-2.13/conversions-between-java-and-scala-collections.html)
+
+```scala
+
+// 2.12
+import collection.JavaConverters._
+
+// 2.13
+import scala.jdk.CollectionConverters._
+
+ArrayBuffer(1, 2, 3).asJava.asScala
+
+```
+
 ### Tailrec Writer
 
 ```
@@ -80,3 +97,23 @@ x: Seq[Int] = Vector(4, 5)
 
 recover -> T
 recoverWith -> F[T]
+
+## Type Classes
+
+statically-checked at compile time!
+
+Type Enrichment
+
+```scala
+implicit class Foo(val t: T) extends AnyVal {
+  def anEnrichingMethod(): U = ???
+}
+```
+
+```scala
+implicit def f(t: T): U = ???
+```
+
+implicit class FooOps[T](value: T) {
+  def f(implicit actioner: Bar[T]): Baz = actioner.f(value)
+} 

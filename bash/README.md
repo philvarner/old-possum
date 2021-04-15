@@ -6,7 +6,7 @@
 * [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/) by Mendel Cooper
 * [Classic Shell Scripting](https://learning.oreilly.com/library/view/classic-shell-scripting/0596005954/) by Arnold Robbins and Nelson H. F. Beebe
 
-## Examples
+## Example
 
 ```sh
 #!/usr/bin/env bash
@@ -15,24 +15,91 @@ set -Eeuo pipefail
 
 readonly VAR1="foo"
 
+ #!/bin/bash
+while getopts "xy:z" opt
+do
+  case "$opt" in
+  x) echo '-x';;
+  y) echo "-y ${OPTARG}";;
+  z) echo '-z';;
+  esac
+done
+
 # todo
+
+if [[ 1 -lt 2 ]] 
+then
+  echo 'c' 
+elif [[ 1 -gt 2 ]]; then
+  echo 'b' 
+else
+  echo 'c' 
+fi
+
+for f in $(ls *.scala)
+do
+  echo "$f"
+done
+
+while [[ true ]]
+do 
+  echo "forever"
+done
+
+case "$A" in 
+a) echo "a";;
+b) echo "b";;
+b*) echo "b*";;
+*) echo "something else";;
+esac
+
+
+
 ```
 
-## Tricky Details
+## Pitfalls
 
-* variable assignment requires no spaces around the `=` -- otherwise, it's 3 space-delimited arguments! e.g., "FOO=foo"
+* variable assignment must NOT have space around the `=` -- otherwise, it's 3 space-delimited arguments! e.g., "FOO=foo"
 * not block-scoped -- variables that are assigned are in-scope for the rest of the script
-* use `[[ ${A} = 'a']]` for conditionals -- `[ ${A} = 'a']` fails if `${A}` is undefined
+
 * export allows sub-processes (shells?) to see the value, or run cmds with "FOO=foo some-cmd"
-* `set +o history` to not write commands to history (good for passwords and keys)
+* `set +o history` to not write commands to history (good for passwords and keys)--> `+o` means off, lol
 * VARIABLES are usually ALL CAPS
 * reference in strings as "a${SOMEVAR}b" -- double quotes interpolate, single quotes do not
+* put one test in each `[...]` and logical those, e.g., `! [ ... ]`, `[ ... ] && [ ... ]`
+* `=` and `==` are the same in test
 
 ## Other
 
 * `readonly A=a` ==> readonly vars
 * `local A=a` ==> by default vars are global, this makes A local to the function it's defined in
 * clean Bash shell ==> `env -i bash --noprofile --norc`
+* `$IFS` defines the default separator for things, e.g. ` \t\n`
+
+## Tests
+
+* `=` and `==` are the same
+* use `[[ ${A} = 'a']]` for conditionals -- `[ ${A} = 'a']` fails if `${A}` is undefined
+* `[` is a builtin that does test
+* `[[` is a completely different builtin that does test but handles non-existent variables correctly
+* The trick `[ "x$UNDEFINED" = "x" ]` should use `[[` w/o the `x` 
+
+
+* `-z ${A}` true if empty string
+* `-e ${A}` true if A exists as a file
+* `-d ${A}` true if A is a directory
+
+* integer comparisons should use form like `-lt` or put double-parens instead of `[[` --> ``(( 1 < 2))``
+
+With glob pattern matching:
+
+```sh
+[[ $a == z* ]]   # True if $a starts with an "z" 
+[[ $a == "z*" ]] # literal match
+
+[ $a == z* ]     # globbing and word splitting
+[ "$a" == "z*" ] # literal match
+```
 
 ## What's the difference between .bash_profile and .bashrc?
 
@@ -209,3 +276,21 @@ find . -name '*.pdf' -print0 | sort -z | xargs -0 -L1 sh -c 'echo "<li><a href=\
 * array --  `arr=("a" "b" "c")`
 * access -- `echo "${arr[0]}"`
 * length -- `echo {#arr[@]}`
+
+## Process Substitution
+
+make a virtual file out of command output
+
+```sh
+diff <(cmd1) <(cmd2)
+```
+
+also `>()`
+
+## Subshell
+
+```sh
+(
+  ls
+) >> out
+```

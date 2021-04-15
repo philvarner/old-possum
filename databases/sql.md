@@ -33,6 +33,26 @@ Referential actions -- ON UPDATE, ON DELETE -- CASCADE, SET NULL, SET DEFAULT, N
 MySQL - AUTO_INCREMENT
 PostgreSQL - `SERIAL PRIMARY KEY` or `BIGSERIAL`
 
+* Numeric: INTEGER, BIGINT, SMALLINT, DECIMAL(p,s), REAL, DOUBLE PRECISION
+
+* TRUNC - towards zero
+* ROUND - nearest integer
+* FLOOR - down, even for negative values
+* COALESCE - first non-null
+* ABS, MOD, LEAST, GREATEST
+
+String
+
+* LOWER, UPPER
+* SUBSTRING(s FROM i FOR len) 
+* TRIM
+
+## Table Operations
+
+* DELETE FROM table_name
+* SELECT cols FROM table_name
+* INSERT INTO table_name (c1, c2, ...) VALUES (v1, v2, ...)
+* UPDATE table_name SET (c1, c2, ...) = (v1, v2, ..)
 
 ## Query
 
@@ -58,7 +78,14 @@ HAVING
 SELECT 
 ORDER BY
 
+## JSON
+
+* PostgreSQL JSON [types](https://www.postgresql.org/docs/current/datatype-json.html) and [functions](https://www.postgresql.org/docs/current/functions-json.html)
+* [MySQL - The JSON Data Type](https://dev.mysql.com/doc/refman/8.0/en/json.html)
+  
 ## Regexes
+
+Not standard, implementation specific.
 
 * [SQL Pocket Guide - Regular Expressions](https://learning.oreilly.com/library/view/sql-pocket-guide/9781449397586/ch01s45.html)
 * [Oracle Regex Pocket Reference](https://learning.oreilly.com/library/view/oracle-regular-expressions/0596006012/)
@@ -91,11 +118,28 @@ s SIMILAR TO p`
 
 supports POSIX
 
-
-
 \1 backref
 
-## JOIN
+
+## Datetime functions
+
+INTERVAL - duration
+`timestamp with time zone` or `timestamptz`
+
+### PostgreSQL
+[types](https://www.postgresql.org/docs/current/datatype-datetime.html) and [functions](https://www.postgresql.org/docs/current/functions-datetime.html)
+
+
+PostgreSQL TO_TIMESTAMP(epoch_seconds)
+PostgreSQL SELECT CURRENT_DATE;
+
+### MySQL
+
+[types](https://dev.mysql.com/doc/refman/8.0/en/datetime.html) and [functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
+
+MySQL SELECT CURDATE();
+
+## Query Operation: JOIN
  
 In Postgres, the default JOIN is INNER JOIN, so inner is used if only the term JOIN is specified.
  
@@ -139,7 +183,7 @@ FROM users CROSS JOIN threads
 ON user.id = threads.userid
 ```
  
-## GROUP BY
+## Query Operation: GROUP BY
 
 only terms in GROUP BY or other aggregates can appear in SELECT
 
@@ -176,7 +220,7 @@ You can also add DISTINCT to the function within the aggregation function, for e
 > COUNT (DISTINCT foo)
 > COUNT (DISTINCT foo || bar)
  
-## HAVING
+## Query Operation: HAVING
  
 The simple difference between WHERE and HAVING is that WHERE operates on individual rows, whereas HAVING operates at the group level. This means that any column that can appear in the SELECT of a query with a GROUP BY can appear in the HAVING predicate.  HAVING only operates on grouping columns and aggregate functions applied to the group.
  
@@ -204,11 +248,21 @@ A more useful query is "find me how many docs have more than 10 comments".
  
 The HAVING clause matches against the the aggregation on each group partitioned by the GROUP BY, rather than the individual rows as WHERE operates on.
 
+## Set Operations
+
+* UNION -- union w/ unique rows (set semantics)
+* UNION ALL -- union w/ duplicate row preservation (bag semantics)
+* INTERSECT -- intersection
+* INTERSECT ALL -- intersection with duplicate row preservation
+* EXCEPT (difference, subtraction)
+* EXCEPT ALL  - a row that has m duplicates in the left table and n duplicates in the right table will appear max(m-n,0) times in the result set.
+
+
+## Views
+
+## indexes
 
 ## Notes
-
-SQL
-
 
 HAVING is like WHERE but with agg functions
 
@@ -261,35 +315,6 @@ IS NOT NULL
 COUNT(x)
 
 ALL vs DISTINCT (**not** UNIQUE)
-
-## Datetime functions
-
-### PostgreSQL
-[types](https://www.postgresql.org/docs/current/datatype-datetime.html) and [functions](https://www.postgresql.org/docs/current/functions-datetime.html)
-
-`timestamp with time zone` or `timestamptz`
-
-PostgreSQL TO_TIMESTAMP(epoch_seconds)
-PostgreSQL SELECT CURRENT_DATE;
-
-### MySQL
-
-[types](https://dev.mysql.com/doc/refman/8.0/en/datetime.html) and [functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
-
-MySQL SELECT CURDATE();
-
-
-## Views
-
-## indexes
-
-## JSON
-
-* PostgreSQL JSON [types](https://www.postgresql.org/docs/current/datatype-json.html) and [functions](https://www.postgresql.org/docs/current/functions-json.html)
-* [MySQL - The JSON Data Type](https://dev.mysql.com/doc/refman/8.0/en/json.html)
-  
-
-## Other
 
 WITH clause vs. subquery - PostgreSQL, Oracle, and SQL Server
 
