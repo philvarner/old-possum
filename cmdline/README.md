@@ -3,25 +3,29 @@
 - [Command Line](#command-line)
   - [Resources](#resources)
   - [To Remember](#to-remember)
+  - [tmux](#tmux)
   - [Terminals](#terminals)
   - [Prompt](#prompt)
   - [Replay cmd line sessions](#replay-cmd-line-sessions)
   - [Tools](#tools)
   - [JSON](#json)
+  - [CSV](#csv)
   - [Tricks](#tricks)
   - [Redirect all output from a program:](#redirect-all-output-from-a-program)
   - [Grouping commands](#grouping-commands)
+  - [Make](#make)
   - [curl](#curl)
   - [GIF Creation from PNGs](#gif-creation-from-pngs)
   - [Webserver](#webserver)
   - [File MIME Type](#file-mime-type)
   - [Rename files and add a prefix](#rename-files-and-add-a-prefix)
-  - [tmux](#tmux)
   - [screen](#screen)
   - [grep](#grep)
   - [awk](#awk)
   - [sed](#sed)
-  - [tr](#tr)
+    - [Resources](#resources-1)
+    - [Description](#description)
+  - [tr (translate or transliterate)](#tr-translate-or-transliterate)
   - [cut](#cut)
   - [paste](#paste)
   - [sort](#sort)
@@ -46,7 +50,20 @@
 ## To Remember
 
 * `cd -` cd back to previous directory
- 
+
+## tmux
+
+* [Getting Started](https://github.com/tmux/tmux/wiki/Getting-Started)
+
+* `tmux new`
+* `C-b` puts into tmux command mode
+* `C-b %` - split into two vertical panes
+* `C-b "` - split into two horizontal panes
+* `C-b 0` changes to window 0, etc.
+* `C-b n` and `C-b p` for next and previous window
+* `C-b l` last window
+* C-b Up, C-b Down, C-b Left and C-b Right change to the pane above, below, left or right of the active pane. T
+  
 ## Terminals
 
 MacOS's Terminal is pretty bare-bones, so most people use other ones.
@@ -71,6 +88,10 @@ MacOS's Terminal is pretty bare-bones, so most people use other ones.
 
 * [jq cookbook](https://github.com/stedolan/jq/wiki/Cookbook)
 
+## CSV
+
+* [xsv](https://github.com/BurntSushi/xsv)
+
 ## Tricks
 
 * adding `--` to many command line tools indicates the flags have ended. This means `ls -- -l` will list a file named `-l`
@@ -90,6 +111,27 @@ Using a subshell
 
 ```
 (cd target/path && curl -O URL)
+```
+
+## Make
+
+* [Makefile Tutorial](https://makefiletutorial.com/)
+* [GNU Make Manual](https://www.gnu.org/software/make/manual/)
+
+The most important thing to remember:
+
+Makefile text **requires** the use of tabs instead of spaces. They will not work otherwise!!!
+
+Run these either by renaming the makefile to `Makefile` with
+
+```
+make
+```
+
+or use the `-f` flag 
+
+```
+make -f Makefile.example1
 ```
 
 ## curl
@@ -114,14 +156,6 @@ rename 's/(.+)\.JPG/prefix_$1.jpg/' *.JPG
 
 use `-n` flag for a dry run
 
-## tmux
-
-* [Getting Started](https://github.com/tmux/tmux/wiki/Getting-Started)
-
-* `tmux new`
-* `C-b` puts into tmux command mode
-* `C-b %` - split into two vertical panes
-* `C-b "` - split into two horizontal panes
 
 ## screen
 
@@ -129,132 +163,139 @@ use `-n` flag for a dry run
 * [IU](https://kb.iu.edu/d/acuy)
 
 ```sh  
-screen <cmd>
-screen -ls
+screen <cmd> # run command in screen
+screen -ls # list active screen sessions
 screen -r  # reattach
 
+## hmm, not sure what this does
 screen -dmS session_name sh -c '/share/Sys/autorun/start_udp_listeners.sh; exec bash'
 
-screen -L
+screen -L # turn on logging
 
-ctrl-A d
+# ctrl-A d  ## to detach
 
-screen -L time docker run -it -w /tmp --ulimit nofile=90000:90000 \
+## example running docker
+screen -L -S my_docker_session time docker run -it -w /tmp --ulimit nofile=90000:90000 \
     -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
     -e JAVA_OPTS="-Xmx4g -Dtype.safe.config.arg=$XXX" \
     repo/image-name --some-flags
 ```
-
 ## grep
 
-* after: -A num 
-* before: -B NUM 
-* around: -C NUM 
-* insensitive: -i
-* inverse match: -v
-* names of files only: -l 
-* inverse name of file only: -L 
-* count only: -c 
-* original line number: -n
-* color matches: --color=always
-* recursive dir: -r
-* don't print filename: -h 
+* after: `-A num`
+* before: `-B NUM`
+* around: `-C NUM` 
+* case-insensitive: `-i`
+* inverse match: `-v`
+* names of files only: `-l`
+* inverse name of file only: `-L`
+* count only: `-c` 
+* original line number: `-n`
+* color matches: `--color=always`
+* recursive dir: `-r`
+* don't print filename: `-h`
 
+Related commands:
 * egrep - extended, includes char classes, bracket classes, etc. 
 * fgrep - fixed strings, usually read from -f parameter 
 
-
 ## awk
 
-focused more on columnar data
+https://www.grymoire.com/Unix/Awk.html
 
-default -- whitespace-separated columns
+focused primarily on columnar data (vs. sed being for line-oriented)
 
+default -- whitespace-separated columns, indexed from 1
+
+Output second column:
+```
 awk '{print $2}'
-
+```
 
 > awk '/The/' text.txt 
 > awk '/^rs/' text.txt 
 > awk 'NR > 5' text.txt 
-
-
-http://www.vectorsite.net/tsawk_1.html#m2 
-
 
 awk '{print $1 "|" $2 "|" $3}'
 
 cat files.txt | xargs ls -l | cut -c 23-30 | 
 awk '{total = total + $1}END{print total}' 
 
-
-
 awk '$1 == 1 && $2 ~ /^c[^ ]*e$/ { print $2 }'
 
 ## sed
 
--E :: extended syntax -- parens are special chars
+### Resources
 
+* [The Grymoire -- sed](http://www.grymoire.com/Unix/Sed.html)
 
-[ab]  -- a or b, one of many different characters
+### Description
 
-character classes
-
-
-(ab)
-
-(ab|bc)
-
-\2   capture groups
-
-.*? non greedy match
-
-(?:ab|bc)
-
-
-http://www.grymoire.com/Unix/Sed.html
+Focused primarily on line-oriented data (vs. awk being more columnar)
 
 Sed takes text input in, does some commands on the text, and sends text out. By default, it takes text in on standard in and sends the modified text out on standard out. 
 
-Basic use 
-
 The most common use of sed is for regex replacements with the "s" sed command: 
 
+```sh
 sed 's/foo/bar/' < foo.txt 
+```
 
 substitutes (s) the first instance of 'foo' on each line with 'bar', from the contents in from foo.txt out to the console. 
 
 Since this is a standard regex replace, we can add 'g' at the end to do the replace globally (e.g., every instance) in the input: 
 
+```sh
 sed 's/foo/bar/g' 
+```
 
 Sed also allows you to specify the input file name or file names in the command, instead of having to pipe it from the file 
 
+```sh
 sed 's/foo/bar/g' foo.txt foo2.txt 
+```
 
 This default syntax for the command is shorthand for the flag '-e' 
 
+```sh
+# equivalent
+sed 's/foo/bar/g' foo.txt 
 sed -e 's/foo/bar/g' foo.txt 
+```
 
-This is useful if you want to specify more than one command to be run in sequence.  So this command will replace foo with bar, then bar with baz.  For very large files, this is much faster than running sed twice, since the file only has to be read once and output written once. 
+This is useful if you want to specify more than one command to be run in sequence.  So this command will replace foo with bar, then bar with baz.  For very large files, this is much faster than running sed twice, since the file only has to ```be read once and output written once. 
 
+```sh
 sed -e 's/foo/bar/g' -e 's/bar/baz/g' foo.txt 
+```
 
 If you have a lot of commands to run, you can put them in a file and call sed with that file 
 
+```sh
 sed -f cmds.txt foo.txt 
+```
 
-One common use case with sed is doing a replacement on a lot files, and doing the replacements in-place on the files.  The -i flag will do these replacements in place on the files.  The argument to -i is the suffix to append to the name of the backup of the original file, and while option, is highly recommended so you don't accidentally lose your source files. 
+One common use case with sed is doing a replacement on a lot files, and doing the replacements in-place on the files.  The `-i` flag will do these replacements in place on the files.  The argument to `-i` is the suffix to append to the name of the backup of the original file, and while option, is highly recommended so you don't accidentally lose your source files. 
 
+```sh
 sed -e 's/foo/bar/g' -i .bak foo.txt 
+```
 
 / can be _ : , | 
 
-
-Advanced 
-
 sed -i ':a;N;$!ba;s/\0/ /g' *xml 
 
-## tr
+* `-E`  extended syntax -- parens are special chars
+[ab]  -- a or b, one of many different characters
+
+character classes:
+* `(ab)`
+* `(ab|bc)`
+* `\2` capture groups
+* `.*?` non greedy match
+* `(?:ab|bc)` non-capturing on ab or bc
+
+## tr (translate or transliterate)
 
      tr [-Ccsu] string1 string2     tr [-Ccu] -d string1 
      tr [-Ccu] -s string1 
@@ -329,8 +370,9 @@ Replacing non az chat with lb
 
 -d delete chars
 -s squeeze repeated chars
-tr -s \n [ *]
+tr -s \n [ *] 
 
+tr -s '\n' -- merge newlines
 
 ## cut
 

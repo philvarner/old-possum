@@ -35,8 +35,6 @@ free throw.
 
 ### More academic/technical
 
-* [Algorithms](https://algs4.cs.princeton.edu/home/) by Robert Sedgewick and Kevin Wayne. Also available on Coursera in [Part 1](https://www.coursera.org/learn/algorithms-part1) and [Part 2](https://www.coursera.org/learn/algorithms-part2)
-* [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition) by Cormen, Leiserson, Rivest and Stein *a/k/a* CLR *a/k/a* "The Big White Book That Won't Fit on a Shelf"
 * [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/) by Jeff Erickson
 * [Algorithms Notes for Professionals](https://books.goalkicker.com/AlgorithmsBook/)
 * [Advanced Algorithms and Data Structures](https://www.manning.com/books/advanced-algorithms-and-data-structures) by Marcello La Rocca
@@ -44,8 +42,19 @@ free throw.
 * [The Algorithm Design Manual](https://www.algorist.com/) by Steven Skiena
 * [Algorithms in a Nutshell](https://learning.oreilly.com/library/view/algorithms-in-a/9781491912973/) by George T. Heineman, Gary Pollice, and Stanley Selkow
 * [TheAlgorithms](https://the-algorithms.com/) and [github](https://github.com/TheAlgorithms)
+* [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-third-edition) by Cormen, Leiserson, Rivest and Stein *a/k/a* CLR *a/k/a* "The Big White Book That Won't Fit on a Shelf"
+* [Daniel G. Graham -- Algorithms](https://danielggraham.com/algorithms/)
+  
+#### Courses 
+* [Algorithms](https://algs4.cs.princeton.edu/home/) by Robert Sedgewick and Kevin Wayne. Also available on Coursera in [Part 1](https://www.coursera.org/learn/algorithms-part1) and [Part 2](https://www.coursera.org/learn/algorithms-part2) 
 * [Coursera - Data Structures and Algorithms Specialization](https://www.coursera.org/specializations/data-structures-algorithms)
-* [Introduction to Algorithms (MIT SMA 5503)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-introduction-to-algorithms-sma-5503-fall-2005/)
+
+#### MIT Courses
+
+in prereq order:
+
+* [Mathematics for Computer Science -- MIT 6.042J](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/)
+* [Intro to Algorithms -- MIT 6.006](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/)
 * [Design and Analysis of Algorithms (MIT 6.046J / 18.410J)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/)
 * [Advanced Data Structures (MIT 6.851)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-851-advanced-data-structures-spring-2012/)
 

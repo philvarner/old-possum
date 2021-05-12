@@ -2,28 +2,48 @@
 
 ## Resources
 
-* [Learn Bash the Hard Way](https://leanpub.com/learnbashthehardway) by Ian Miell
-* [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/) by Mendel Cooper
-* [Classic Shell Scripting](https://learning.oreilly.com/library/view/classic-shell-scripting/0596005954/) by Arnold Robbins and Nelson H. F. Beebe
+- [Learn Bash the Hard Way](https://leanpub.com/learnbashthehardway) by Ian Miell
+- [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/) by Mendel Cooper
+- [Classic Shell Scripting](https://learning.oreilly.com/library/view/classic-shell-scripting/0596005954/) by Arnold Robbins and Nelson H. F. Beebe
+
+##  Tools
+
+- [shellcheck](http://www.shellcheck.net/)
 
 ## Example
 
 ```sh
 #!/usr/bin/env bash
 set -Eeuo pipefail
-# set -x # print each command before exe
+# set -x # print each command before executing
 
 readonly VAR1="foo"
 
+function help(){
+  cat > /dev/stdout << END
+  Some help.
+END
+}
+
  #!/bin/bash
-while getopts "xy:z" opt
+while getopts "h?vxy:z" opt
 do
   case "$opt" in
+  h|\?) 
+          help
+          exit 0
+          ;;
+  v) VERBOSE=1 ;;
   x) echo '-x';;
   y) echo "-y ${OPTARG}";;
   z) echo '-z';;
   esac
 done
+
+if [[ ${VERBOSE} -gt 0 ]]
+then
+  set -x fi
+fi
 
 # todo
 
@@ -195,16 +215,36 @@ String comparison: = == != < > -z (== '') -n (!= '')
 
 File test: -e exists
 
+## Heredoc
+
+substituted $MYVAR
+
+```bash
+cat > script.sh << END
+  #!/bin/bash
+  echo $MYVAR
+END
+```
+
+literal $MYVAR (END in quotes)
+
+```bash
+cat > script.sh << 'END'
+  #!/bin/bash 
+  echo $MYVAR
+END
+```
+
 ## Scratch 
 
-```
+```bash
 exec 5>&1
 FF=$(echo aaa|tee >(cat - >&5))
 echo $FF
 ```
 
 
-```
+```bash
 if [ -z "${MY_VAR:-}" ]; then
   echo "MY_VAR was not set"
 fi

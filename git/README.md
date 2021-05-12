@@ -1,4 +1,4 @@
-# Git
+t pu# Git
 
 ## Resources
 
@@ -7,9 +7,10 @@
 * [Oh Shit, Git!?!](https://ohshitgit.com/) or [Dangit, Git!?!](https://dangitgit.com/en)
 * [The Architecture of Open Source Applications - Git](http://aosabook.org/en/git.html) by Susan Potter
 * [Pro Git](https://git-scm.com/book/en/v2) by Scott Chacon and Ben Straub (2016, so a little out-of-date, but an excellent description of the internals)
-* Adam Ruka [OneFlow – a Git branching model and workflow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow) and [Gitflow considered harmful](https://www.endoflineblog.com/gitflow-considered-harmful) -- I used gitflow for a long time and found it hard to use for SaaS, and this nails a lot of th things I didn't like and had to unlearn
+* Adam Ruka [OneFlow – a Git branching model and workflow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow) and [Gitflow considered harmful](https://www.endoflineblog.com/gitflow-considered-harmful) -- I used gitflow for a long time and found it hard to use for SaaS, and this nails a lot of the things I didn't like and had to unlearn
 * [Chris Beams - How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
 * [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) and [commitlint](https://github.com/conventional-changelog/commitlint)
+* [joshnh/Git-Commands](https://github.com/joshnh/Git-Commands)
 
 ## Config
 
@@ -23,6 +24,7 @@
   ci = commit
   st = status
   re = restore
+  br = branch
   l = log --oneline --graph --decorate  --all
   pick = cherry-pick -n
 ```
@@ -33,11 +35,15 @@
 
 `checkout` was a confusing command, an has now mostly been replaced by other commands.
 
-Instead of `git checkout -b some_branch`, use `git branch some-branch -u origin/some-branch`
-
 Instead of `git checkout some_branch`, use `git switch some-branch`
 
 Instead of `git checkout file_in_working_tree`, use `git restore file_in_working_tree`
+
+Instead of `git checkout -b some_branch`, use `git branch some-branch -u origin/some-branch` (but then have to sw into the branch)
+
+
+git br docs-itertools-examples
+git push -u origin docs-itertools-examples
 
 ### Forking a GitHub repo
 
