@@ -4,9 +4,22 @@
 
 * [Functional Programming HOWTO by A. M. Kuchling](https://docs.python.org/3/howto/functional.html)
 * [PyMonad](https://github.com/jasondelaat/pymonad)
-* Effective Python Chapter 4 Generators and Comprehensions
+* *Effective Python* Chapter 4 Generators and Comprehensions
 
-## Comprehensions
+## Immutability
+
+Python has no way of declaring a variable to non-reassignable.
+
+frozenlist
+use tuple instead of list
+
+## Basic HOFs
+
+`map(f, xs)` and `filter(f, xs)` are built-ins. `functools.reduce(f, xs[, init])` can be used either as reduce or foldl.
+
+## Listcomps and Genexps
+
+These take the place of most uses of map and filter.
 
 list:
 ```python
@@ -27,8 +40,6 @@ generator:
 ```python
 (x*2 for x in xs if x % 2 == 0)
 ```
-
-
 
 ## functools
 

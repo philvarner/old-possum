@@ -9,6 +9,8 @@
 
 ## Notes
 
+`\dt` describe tables
+
 Basics
 
 http://reinout.vanrees.org/weblog/2012/06/04/djangocon-postgres.html

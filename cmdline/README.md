@@ -12,6 +12,7 @@
   - [CSV](#csv)
   - [Tricks](#tricks)
   - [Redirect all output from a program:](#redirect-all-output-from-a-program)
+  - [diff two zips](#diff-two-zips)
   - [Grouping commands](#grouping-commands)
   - [Make](#make)
   - [curl](#curl)
@@ -99,6 +100,12 @@ MacOS's Terminal is pretty bare-bones, so most people use other ones.
 ## Redirect all output from a program: 
 
 command > /dev/null 2>&1& 
+
+## diff two zips
+
+```
+diff -y <(unzip -l file1.zip) <(unzip -l file2.zip)
+```
 
 ## Grouping commands
 

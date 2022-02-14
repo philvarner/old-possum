@@ -178,6 +178,10 @@ result=$(ls)
 
 ## splitting with regexes
 
+p=/foo/bar/file1
+path=$( echo ${p%/*} )
+file=$( echo ${p##*/} )
+
 ```
 shopt -o nounset
 declare -rx       FILENAME=payroll_2007-06-12.txt

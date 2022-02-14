@@ -18,9 +18,9 @@
 ## twiddle wakka
 
 Version spec	Actual range
-~> 2.4.0	>= 2.4.0 and < 2.5.0
-~> 2.4	>= 2.4.0 and < 3.0
-~> 2	>= 2.0 and < 3.0
+~= 2.4.0	>= 2.4.0 and < 2.5.0
+~= 2.4	>= 2.4.0 and < 3.0
+~= 2	>= 2.0 and < 3.0
 
 ## inspection
 
@@ -32,3 +32,16 @@ inspect.signature() or inspect.getfullargspec()
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt 
+
+## Tuple unpacking
+
+```python
+a, b, *rest = range(5)
+a, *body, c, d = range(5)
+```
+
+can be nested also
+
+## find
+
+next((link for link in self.links if link.rel == rel), None)

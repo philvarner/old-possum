@@ -23,6 +23,7 @@
   - [Web Development](#web-development)
   - [Zip](#zip)
   - [Floating Point](#floating-point)
+  - [Honest Troubleshooting Code of Conduct](#honest-troubleshooting-code-of-conduct)
 
 Everything that doesn't fit elsewhere.
 
@@ -136,3 +137,7 @@ https://en.wikibooks.org/wiki/Regular_Expressions/POSIX_Basic_Regular_Expression
 ## Floating Point
 
 * Write Great Code, Volume 1, Chapter 4
+
+## Honest Troubleshooting Code of Conduct 
+
+* [The Honest Troubleshooting Code of Conduct](http://rachelbythebay.com/w/2021/05/01/code/)
