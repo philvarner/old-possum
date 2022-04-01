@@ -41,7 +41,7 @@ also sorting, the score never matters.
         { "term" : { "tags" : "env1" } },
         { "term" : { "tags" : "deployed" } }
       ],
-      "minimum_should_match" : 1 // at least on of the should terms must match
+      "minimum_should_match" : 1 // at least one of the should terms must match
     }
   }
 }
@@ -186,3 +186,100 @@ Backup
 }
 
 
+
+https://www.elastic.co/blog/improving-the-performance-of-high-cardinality-terms-aggregations-in-elasticsearch
+
+https://www.elastic.co/blog/advanced-tuning-finding-and-fixing-slow-elasticsearch-queries
+
+
+
+step_september152014_70rndsel_igbpcl.geojson
+
+cb_2017_us_state_500k.geojson
+
+tnc_terr_ecoregions.geojson
+
+tl_2018_us_aiannh.geojson
+
+
+
+Elasticsearch
+
+
+https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#instrument
+
+/_search
+/_all/{type}/_search
+/index1,index2/{type}/_search
+
+/_count
+/_aggregate
+/_all/{type}/{id}
+
+POST /{index}/_doc
+
+
+parameters
+* size - number of documents returned 0 to 10000
+* fields
+* sort
+
+ignore_malformed: false
+
+{
+  "query": {
+    "filtered": {
+      "filter": {
+        "term": {
+          "name": "elasticsearch"
+        }
+      }
+    }
+  }
+}
+
+{
+  "aggregations" : {
+    "organizers" : {
+      "terms" : { "field" : "organizer" }
+    }
+  }
+}
+Geoshape query https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html
+
+Elastic's Guide to Mapping and Geospatial Search
+https://www.youtube.com/watch?v=ugvvAy-QNqI
+
+Geospatial Advancements in Elasticsearch by Knize
+https://www.slideshare.net/elasticsearch/geospatial-advancements-in-elasticsearch
+
+
+partial document - POST .../_update "doc"
+POST .../_update "doc" and "upsert"
+
+update with script
+
+to replace, use "index" instead of "create"
+?version=3 -- set with the version you expect it to have
+
+geo_bounding_box (only points) vs. geo_shape
+
+
+
+
+￼
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html
+
+query (scoring order) vs. filter (must match)
+
+
+MUST MUST MUST
+
+query / filtered / filter / bool / must
+
+term
+range
+
+exists
+missing

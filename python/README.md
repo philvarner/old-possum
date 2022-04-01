@@ -5,6 +5,10 @@
 * Fluent Python by Luciano Ramalho
 * Effective Python by Brett Slatkin
 
+## Projects
+
+- [Cookiecutter Hypermodern Python](https://cookiecutter-hypermodern-python.readthedocs.io/en/2021.11.26/quickstart.html)
+
 ## Typing
 
 * http://mypy-lang.org/
