@@ -119,8 +119,8 @@ What do we mean by functional programming?
 ## Built-in Features and Behavior
 
 * @dataclass(eq=True, order=True, frozen=True) (instead of namedtuple)
-* Final[float]
-* 3.10 structural pattern matching
+* Final[float] (3.8+)
+* structural pattern matching (3.10+)
 * lambdas
 * itertools
 * functools
