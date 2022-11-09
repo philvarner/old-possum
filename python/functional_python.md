@@ -16,73 +16,68 @@
       - [F\#](#f)
       - [Python w/ Expression](#python-w-expression)
       - [Python w/ Returns](#python-w-returns)
-    - [Either / Result](#either--result)
+    - [Either / Result / Try](#either--result--try)
       - [Haskell](#haskell-1)
       - [Scala](#scala-1)
       - [Rust](#rust-1)
       - [F\#](#f-1)
       - [Python w/ Expression](#python-w-expression-1)
       - [Python w/ Returns](#python-w-returns-1)
-    - [Try](#try)
+      - [Python w/ Expression](#python-w-expression-2)
+      - [Python w/ Returns](#python-w-returns-2)
+    - [Immutable List](#immutable-list)
       - [Haskell](#haskell-2)
       - [Scala](#scala-2)
       - [Rust](#rust-2)
       - [F\#](#f-2)
-      - [Python w/ Expression](#python-w-expression-2)
-      - [Python w/ Returns](#python-w-returns-2)
-    - [Immutable List](#immutable-list)
+      - [Python w/ Expression](#python-w-expression-3)
+      - [Python w/ Returns](#python-w-returns-3)
+    - [Immutable Set](#immutable-set)
       - [Haskell](#haskell-3)
       - [Scala](#scala-3)
       - [Rust](#rust-3)
       - [F\#](#f-3)
-      - [Python w/ Expression](#python-w-expression-3)
-      - [Python w/ Returns](#python-w-returns-3)
-    - [Immutable Set](#immutable-set)
+      - [Python w/ Expression](#python-w-expression-4)
+      - [Python w/ Returns](#python-w-returns-4)
+    - [Immutable Map](#immutable-map)
       - [Haskell](#haskell-4)
       - [Scala](#scala-4)
       - [Rust](#rust-4)
       - [F\#](#f-4)
-      - [Python w/ Expression](#python-w-expression-4)
-      - [Python w/ Returns](#python-w-returns-4)
-    - [Immutable Map](#immutable-map)
+      - [Python w/ Expression](#python-w-expression-5)
+      - [Python w/ Returns](#python-w-returns-5)
+    - [IO](#io)
       - [Haskell](#haskell-5)
       - [Scala](#scala-5)
       - [Rust](#rust-5)
       - [F\#](#f-5)
-      - [Python w/ Expression](#python-w-expression-5)
-      - [Python w/ Returns](#python-w-returns-5)
-    - [IO](#io)
+      - [Python w/ Expression](#python-w-expression-6)
+      - [Python w/ Returns](#python-w-returns-6)
+    - [State](#state)
       - [Haskell](#haskell-6)
       - [Scala](#scala-6)
       - [Rust](#rust-6)
       - [F\#](#f-6)
-      - [Python w/ Expression](#python-w-expression-6)
-      - [Python w/ Returns](#python-w-returns-6)
-    - [State](#state)
+      - [Python w/ Expression](#python-w-expression-7)
+      - [Python w/ Returns](#python-w-returns-7)
+    - [Reader](#reader)
       - [Haskell](#haskell-7)
       - [Scala](#scala-7)
       - [Rust](#rust-7)
       - [F\#](#f-7)
-      - [Python w/ Expression](#python-w-expression-7)
-      - [Python w/ Returns](#python-w-returns-7)
-    - [Reader](#reader)
+      - [Python w/ Expression](#python-w-expression-8)
+      - [Python w/ Returns](#python-w-returns-8)
+    - [Writer](#writer)
       - [Haskell](#haskell-8)
       - [Scala](#scala-8)
       - [Rust](#rust-8)
       - [F\#](#f-8)
-      - [Python w/ Expression](#python-w-expression-8)
-      - [Python w/ Returns](#python-w-returns-8)
-    - [Writer](#writer)
-      - [Haskell](#haskell-9)
-      - [Scala](#scala-9)
-      - [Rust](#rust-9)
-      - [F\#](#f-9)
       - [Python w/ Expression](#python-w-expression-9)
       - [Python w/ Returns](#python-w-returns-9)
   - [Pattern Matching](#pattern-matching)
-    - [Scala](#scala-10)
-      - [Rust](#rust-10)
-      - [F-sharp](#f-sharp)
+    - [Scala](#scala-9)
+      - [Rust](#rust-9)
+      - [F\#](#f-9)
     - [Expression](#expression-1)
       - [Python w/ Expression](#python-w-expression-10)
     - [Returns](#returns-1)
@@ -257,9 +252,11 @@ b2.bind_optional(lambda x: x + 1 if x else None) # Nothing
 
 ```
 
-### Either / Result
+### Either / Result / Try
 
 #### Haskell
+
+Either left or right type, right-biased
 
 ```haskell
 data Either a b = Left a | Right b
@@ -272,6 +269,9 @@ fmap (+1) (b) -- Left "error"
 ```
 
 #### Scala
+
+Either, right-biased
+
 ```scala
 // Either[A, B] is Left[A] or Right[B], right-biased
 val a: Either[String, Integer] = Right(1)
@@ -281,7 +281,22 @@ a.map(_ + 1) // Right(2)
 b.map(_ + 1) // Left("error")
 ```
 
+Try:
+
+```scala
+// Try[A] is effectively Either[A, Throwable], Success(v) or Failure(ex), success-biased
+import scala.util.{Try, Success, Failure}
+
+var a = Success("a")  
+var b = Failure(new Exception("bad"))  
+
+var ex = Try { throw new Exception("bad") } // Failure(Exception("bad"))
+```
+
 #### Rust
+
+More like Scala's Try than Either.
+
 ```rust
 //enum Result<T, E> {
 //   Ok(T),
@@ -330,32 +345,6 @@ b: Result[int, str] = Failure("error")
 
 a.map(lambda n: n + 1) # Success(2)
 b.map(lambda n: n + 1) # Failure("error")
-```
-
-### Try
-
-#### Haskell
-
-```haskell
-```
-
-#### Scala
-```scala
-// Try[A] is effectively Either[A, Throwable], Success(v) or Failure(ex), success-biased
-import scala.util.{Try, Success, Failure}
-
-var a = Success("a")  
-var b = Failure(new Exception("bad"))  
-
-var ex = Try { throw new Exception("bad") } // Failure(Exception("bad"))
-```
-
-#### Rust
-```rust
-```
-
-#### F\# 
-```fsharp
 ```
 
 #### Python w/ Expression
@@ -610,7 +599,7 @@ match a {
 }
 ```
 
-#### F-sharp
+#### F\#
 
 ```fsharp
 match validInt with
