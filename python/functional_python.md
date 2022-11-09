@@ -76,11 +76,10 @@
       - [Python w/ Returns](#python-w-returns-9)
   - [Pattern Matching](#pattern-matching)
     - [Scala](#scala-9)
-      - [Rust](#rust-9)
-      - [F\#](#f-9)
-    - [Expression](#expression-1)
+    - [Rust](#rust-9)
+    - [F\#](#f-9)
       - [Python w/ Expression](#python-w-expression-10)
-    - [Returns](#returns-1)
+      - [Python w/ Returns](#python-w-returns-10)
   - [Functions](#functions)
     - [Higher-order Functions](#higher-order-functions)
     - [Function Composition](#function-composition)
@@ -590,7 +589,7 @@ s match {
 }
 ```
 
-#### Rust
+### Rust
 ```rust
 let a = Some(1);
 match a {
@@ -599,15 +598,13 @@ match a {
 }
 ```
 
-#### F\#
+### F\#
 
 ```fsharp
 match validInt with
 | Some x -> printfn "the valid value is %A" x
 | None -> printfn "the value is None"
 ```
-
-### Expression
 
 #### Python w/ Expression
 ```python
@@ -631,7 +628,7 @@ for value in a.match(Some):
 print(a.map(lambda n: n + 1))
 ```
 
-### Returns
+#### Python w/ Returns
 ```python
 from dataclasses import dataclass
 from returns.maybe import Maybe, Some, Nothing, maybe
