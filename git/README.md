@@ -1,4 +1,4 @@
-t pu# Git
+# Git
 
 ## Resources
 
