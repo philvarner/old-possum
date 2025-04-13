@@ -18,7 +18,7 @@
 
 ### aliases in ~/.gitconfig [alias]
 
-```
+```text
 [alias]
   sw = switch
   ci = commit
@@ -31,6 +31,18 @@
 
 ## Commands
 
+### Squashing commits
+
+```sh
+git checkout main
+git pull
+git checkout my-branch
+git reset --soft $(git merge-base main HEAD)
+git add .
+git commit -m "new message"
+git push --force # or --force-with-lease
+```
+
 ### Checkout is confusing
 
 `checkout` was a confusing command, an has now mostly been replaced by other commands.
@@ -41,17 +53,13 @@ Instead of `git checkout file_in_working_tree`, use `git restore file_in_working
 
 Instead of `git checkout -b some_branch`, use `git branch some-branch -u origin/some-branch` (but then have to sw into the branch)
 
-
-git br docs-itertools-examples
-git push -u origin docs-itertools-examples
-
 ### Forking a GitHub repo
 
 Based on [GitHub Fork a Repo docs](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) and [Merging an Upstream Repo into your Fork](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/)
 
 Use the GitHub UI to fork the project, e.g., fork `git@github.com:octocat/Spoon-Knife.git to` `git@github.com:octocat/Spoon-Knife.git`. Then:
 
-```
+```sh
 git clone git@github.com:YOUR-USERNAME/Spoon-Knife.git
 git remote add upstream git@github.com:octocat/Spoon-Knife.git
 git fetch upstream
@@ -59,7 +67,7 @@ git fetch upstream
 
 If you already cloned from what you now want to be the upstream before forking:
 
-```
+```sh
 git remote set-url origin git@github.com:YOUR-USERNAME/Spoon-Knife.git
 git remote add upstream git@github.com:octocat/Spoon-Knife.git
 git branch -D main
@@ -67,7 +75,7 @@ git branch -D main
 
 Then, create local branches tracking branches of the same name in the upstream:
 
-```
+```sh
 git branch main -u upstream/main
 
 # OR
@@ -79,17 +87,20 @@ git branch master -u upstream/master
 ### Fetch a remote
 
 The entire remote:
-```
+
+```sh
 git fetch origin
 git fetch upstream
 ```
 
 only one branch of a remote:
-```
+
+```sh
 git fetch origin main
 ```
 
-## Merge a remote to local 
+## Merge a remote to local
+
 on `main`:
 
 ```
