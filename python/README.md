@@ -1,9 +1,13 @@
 # Python
 
-## Resources 
+- [Functional Python Notebook](./functional_python.ipynb)
 
-* Fluent Python by Luciano Ramalho
-* Effective Python by Brett Slatkin
+## Resources
+
+- Fluent Python by Luciano Ramalho
+- Effective Python by Brett Slatkin
+- Functional Python Programming - Third Edition by Steven F. Lott
+- Supercharged Python: Take Your Code to the Next Level by Overland and Bennett
 
 ## Projects
 
@@ -11,13 +15,13 @@
 
 ## Typing
 
-* http://mypy-lang.org/
-* https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
-* Pylance
+- <http://mypy-lang.org/>
+- <https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html>
+- Pylance
 
 ## Static Analysis
 
-* https://pypi.org/project/pyflakes/
+- <https://pypi.org/project/pyflakes/>
 
 ## twiddle wakka
 
@@ -35,7 +39,7 @@ inspect.signature() or inspect.getfullargspec()
 
 python3 -m venv venv
 . venv/bin/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 
 ## Tuple unpacking
 
