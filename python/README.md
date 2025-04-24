@@ -1,6 +1,6 @@
 # Python
 
-- [Functional Python Notebook](./functional_python.ipynb)
+- [Using Python as a strong, statically-typed functional language](./functional_python.ipynb)
 
 ## Resources
 
@@ -8,6 +8,10 @@
 - Effective Python by Brett Slatkin
 - Functional Python Programming - Third Edition by Steven F. Lott
 - Supercharged Python: Take Your Code to the Next Level by Overland and Bennett
+- Architecture Patterns with Python by Harry Percival, Bob Gregory
+- Using Asyncio in Python by Caleb Hattingh
+- Python Testing with pytest by Brian Okken
+- Hypermodern Python Tooling by Claudio Jolowicz
 
 ## Projects
 
